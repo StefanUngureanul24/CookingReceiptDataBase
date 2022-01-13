@@ -1,11 +1,6 @@
--- Des index sont automatiquement créés au moment où
--- Les clés primaires sont déclarés dans la création
--- De la table
--- Ou si le champs est défini en tant que UNIQUE
-
--- Dans ce cas nous allons définir des indexes sur 
--- Les champs relevants qui n'ont été pas déclaré comme unique
--- Lors de la création de la table
+-- Indexes are automatically created
+-- When primary keys are declared during the table creation
+-- or if it was defined as UNIQUE
 
 --
 

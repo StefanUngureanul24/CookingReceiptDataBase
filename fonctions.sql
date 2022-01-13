@@ -1,5 +1,5 @@
--- Fonction qui change le nom d'un ingrédient par un autre dans les étapes de réalisation d'une recette
-
+-- Function that changes the name of an ingredient
+-- with an other during the steps of creating the receipt
 CREATE OR REPLACE FUNCTION remplace_ingredients (id_recette_v IN recettes.id_recette%TYPE, source_v IN ingredients.id_ingredient%TYPE, dest_v IN ingredients.id_ingredient%TYPE
 ) RETURN CLOB IS
 BEGIN
@@ -33,7 +33,9 @@ END;
 END;
 /
 
--- Fonction qui retourne a liste des ingrédients où la quantité d’ingrédient a été adaptée pour un nombre de personnes différent du nombre de personnes de la recette d’origine
+-- Function returning a list of ingredients where the ingredient quantity
+-- was adapted for a different number of persons from the one in the
+-- original receipt
 CREATE OR REPLACE FUNCTION remplace_quantite (id_recette_v IN recette.id_recette%TYPE, nb_pers_v IN recette.nb_personnes%TYPE) RETURN CLOB IS
 BEGIN
 	DECLARE 
@@ -58,7 +60,8 @@ END;
 END;
 /
 
--- Procédure qui crée une copie de recette où certains ingrédients ont été remplacés par d'autres équivalents et où le nombre de personnes peut-être différent de celui de la recette originale
+-- Procedure creating a copy of a receipt where certain ingredients where replaced by
+-- an equivalent ingredient and number of persons can be different from the original receipt
 CREATE OR REPLACE PROCEDURE copier_recette(id_recette_v IN recette.id_recette%TYPE, nb_pers IN recette.id_recette%TYPE, ingr_changer_v IN ingredients.id_ingredient%TYPE) IS
 BEGIN
 	DECLARE 
@@ -91,7 +94,9 @@ END;
 END;
 /
 
--- Fonction qui retourne un booléen si la recette ne contient que des ingrédients valides pour un certain régime
+-- Function returning a bool 
+-- if the receipt contains an ingredient that may not be suitable
+-- for a specific diet (vegan, vegetarian etc.)
 CREATE OR REPLACE FUNCTION recette_regime_compatible(id_recette_v IN recette.id_recette%TYPE, regime_v IN regime_alimentaire.nom%TYPE) RETURN BOOLEAN IS
 BEGIN
 	DECLARE

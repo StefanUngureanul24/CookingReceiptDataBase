@@ -1,7 +1,4 @@
--- J'ai ajouté toutes les tables que j'ai mentioné en commentaires
--- Dans la fichier creation.sql
-
--- Pas plus de 20 ingrédients par recettes
+-- Trigger for no more than 20 ingredients per receipt
 
 -- J'ai créé cette table que j'avais pas créée pour le premier rendu (sans inclure les clés étrangères)
 -- CREATE TABLE recette_ingredients (
@@ -30,7 +27,7 @@ CREATE OR REPLACE TRIGGER no_ingredients
 END;
 /
 
--- La liste des ingrédients ne peut pas être générée plus d'un mois à l'avance
+-- The list of ingredients can't be created more than one month in advance
 
 -- J'ai créé cette table que j'avais pas créée pour le premier rendu (sans inclure les clés étrangères)
 -- CREATE TABLE acheter_ingredient (
@@ -40,9 +37,9 @@ END;
 -- id_ ingredient int
 -- );
 
--- J'ai modifié le nom du champs date (marquée ainsi dans le modèle logique) de la table acheter_ingredient 
+-- I changed the date variable's name into data with the following command: 
 -- ALTER TABLE acheter_ingredient ADD data DATE;
--- Puisque je récévais une erreur lors de la création de la table
+-- Since I was getting an error while trying to create the table
 
 CREATE OR REPLACE TRIGGER liste_ingredients
 	BEFORE INSERT OR UPDATE ON acheter_ingredient
@@ -55,9 +52,8 @@ BEGIN
 END;
 /
 
--- La durée d'une recette est égale à au moins le minimum de la durée de ses étapes
--- J'ai ajoutée le champ duree_totale dans la table recette, ce que j'avais pas fait pour le premier rendu  
-
+-- A receipt's total time equals to at least the total time of all the steps to make it
+-- I added the variable duree_totale (total time) using the following command:  
 -- ALTER TABLE recette ADD duree_totale decimal(10, 2);
 
 CREATE OR REPLACE TRIGGER duree_recette
@@ -82,7 +78,8 @@ CREATE OR REPLACE TRIGGER duree_recette
 END;
 /
 
--- Le nombre de calorie d’une recette est similaire à celui de la somme des calories de ses ingrédients (+/- 20%).
+-- The number of total calories for one receipt
+-- is similar to the sum of all calories of the ingredients (+/- 20%)
 CREATE OR REPLACE TRIGGER calorie_recette
 	AFTER INSERT OR UPDATE ON recette_ingredients
 	FOR EACH ROW
@@ -107,9 +104,10 @@ END;
 /
 
 		
--- Les plannings de recettes et la liste des courses sont archivés lorsqu’ils sont supprimés ou une fois les dates associées dépassées.
+-- The planning and the shopping list are archived once they are deleted from the database 
 
--- Création de la table faire_planning, ainsi que faire_planning_archive
+-- Creation of the following tables table faire_planning, ainsi que faire_planning_archive
+-- using the following command
 
 -- CREATE TABLE faire_planning (
 -- id_fap int NOT NULL PRIMARY KEY,

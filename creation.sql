@@ -1,6 +1,3 @@
--- Suite aux problèmes que j'ai eu pendant la réalisation du premier rendu
--- J'ai refait le fichier avec la creation des tables
-
 CREATE TABLE UTILISATEUR (
 	id_utilis int NOT NULL PRIMARY KEY,
 	login varchar(255) UNIQUE NOT NULL,
@@ -143,14 +140,15 @@ CREATE TABLE REGIME_INGREDIENTS (
 	FOREIGN KEY (id_ingredient) REFERENCES INGREDIENTS
 );
 
--- Pour afficher les catégories des ingrédients
+-- To reproduce the ingredients' categories
 CREATE TABLE CATEGORIES (
 	id_categorie int NOT NULL PRIMARY KEY,
 	nom_categorie varchar(25) NOT NULL,
 	CONSTRAINT CATEGORIE_NOM_UNIQUE UNIQUE (nom_categorie)
 );
 
--- Pour mettre en lien entre les deux tables INGREDIENTS et CATEGORIES
+-- To create a link between the two tables
+-- INGREDIENTS and CATEGORIES
 CREATE TABLE INGREDIENTS_CATEGORIES (
 	id_ingredient int NOT NULL,
 	id_categorie int NOT NULL,
